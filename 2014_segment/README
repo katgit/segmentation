@@ -1,0 +1,56 @@
+------------------------------
+Input test dataset:
+test.bsq
+    4-band 16-bit signed integer in "ENVI" band-sequential-interleave (BSQ) format
+test.bsq.hdr
+    plaintext "ENVI" header describing test.bsq binary image
+
+------------------------------
+Intermediate dataset:
+test.bsq.ipw
+    4-band 8-bit unsigned integer in "IPW" band-interleave-by-pixel (BIP) format suitable for "segment" program. Contains smaller header describing image attributes before image binary data
+
+------------------------------
+Output dataset:
+t10-m1-n15_15_100_2500_2500/regionmap
+    1-band 32-bit unsigned integer in "ENVI" format
+t10-m1-n15_15_100_2500_2500/regionmap.hdr
+    plaintext "ENVI" header describing regionmap binary image
+
+------------------------------
+Ancillary dataset:
+param.txt
+    parameter inputs for "batch_segment.sh" wrapper script
+
+------------------------------
+Script file:
+batch_segment.sh
+
+Usage:
+    batch_segment.sh -i [image] -p [parameter file]
+
+Description:
+"Wraps" segment program by handling IO from ENVI format. "segment" IPW program
+requires "IPW" format - this script handles the conversion to IPW format by 
+rescaling the data from whatever data type to a 8-bit unsigned integer and by 
+converting the image into a BIP format.
+
+"segment" creates two log files and two output "IPW" image files. The "IPW"
+image files have the names "*.rmap.##" and "*.armap.##" (# denotes the 
+algorithm's loop number on output). The "armap" image is the desired output.
+
+After running "segment" on the intermediate "test.bsq.ipw" image, the script
+handles the conversion from the output "*armap" image to an image readable by
+modern software. This conversion entails adding additional bits into the image 
+(e.g., from 18 to 32), removing the "IPW" header, and creating an ENVI readable
+header text file.
+
+Example:
+batch_segment.sh -i test.bsq -p param.txt
+
+------------------------------
+GDAL "example"
+
+edge_mask/edge_mask.cpp
+
+Note: you will need to update the Makefile

@@ -1,0 +1,5 @@
+To build the program execute:
+gcc -o segment main.o pixel.o region.o segment.o set.o -lm /project/earth/src/ipw-1.1.0/lib/libipw.a /project/earth/src/ipw-1.1.0/lib/libunix.a
+
+To compile:
+gcc -c main.c -I/project/earth/src/ipw-1.1.0/h
