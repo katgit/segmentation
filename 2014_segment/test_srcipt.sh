@@ -3,8 +3,6 @@
 # Chris Holden
 # 02-15-2012
 
-prhdr="/project/earth/packages/ipw-1.1.0/bin/prhdr";
-
 function usage() {
     cat << EOF
     usage: $0 options
@@ -129,8 +127,8 @@ function do_seg {
     fi
 
     ls *myseg.armap.*
-    bytes=`$prhdr *myseg.armap.* | grep 'bytes' | tr -d 'bytes = '`
-	bits=`$prhdr *myseg.armap.* | grep 'bits' | tr -d 'bits = '`
+    bytes=`prhdr *myseg.armap.* | grep 'bytes' | tr -d 'bytes = '`
+	bits=`prhdr *myseg.armap.* | grep 'bits' | tr -d 'bits = '`
     regions=`grep 'regions remain' myseg.log | tail -1 | tr -d 'regions remain after this pass'`
     
     echo katia: $bytes
