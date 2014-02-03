@@ -330,12 +330,6 @@ char          **argv;
  /*
   * begin
   */
-
-    printf(' segment: argc = %d\n', argc);
-    for (i=0; i<argc; i++){
-      printf(' arg # %d:  %s\n',i,argv[i]);
-    }
-
     ipwenter(argc, argv, optv, "segment an image");
 
  /*
@@ -493,9 +487,12 @@ char          **argv;
  /*
   * access input file
   */
+
     if (!got_opt(operands)) {
+      printf("Using ustdin ...\n");
 	fdi = ustdin();
     } else {
+      printf("Using uropen ...\n");
 	fdi = uropen(str_arg(operands, 0));
 	if (fdi == ERROR) {
 	    error("can't open input image file \"%s\"", str_arg(operands, 0));
@@ -508,6 +505,7 @@ char          **argv;
   * Access mask file if there is one
   */
     if (got_opt(opt_M)) {
+      printf("Accessing mask file ...\n");
 	fdm = uropen(str_arg(opt_M, 0));
 	if (fdm == ERROR) {
 	    error("can't open mask image file \"%s\"", str_arg(opt_M, 0));
@@ -538,7 +536,6 @@ char          **argv;
  /*
   * do it
   */
-
     segment(&sproc, fdi, fdm);
 
  /*

@@ -1,0 +1,5 @@
+#!/bin/sh
+
+gcc -c main.c -I/project/earth/src/ipw-1.1.0/h
+gcc -o segment main.o pixel.o region.o segment.o set.o -lm /project/earth/src/ipw-1.1.0/lib/libipw.a /project/earth/src/ipw-1.1.0/lib/libunix.a 
+cp segment /project/earth/packages/ipw-1.1.0.katia/contrib/bin/

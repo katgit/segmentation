@@ -126,10 +126,12 @@ function do_seg {
         segment -t $tol -m $merge -n $varN -b 1 -o $OUTF ../${IMAGEFILE}.ipw | tee myseg.log
     fi
 
+    ls *myseg.armap.*
     bytes=`prhdr *myseg.armap.* | grep 'bytes' | tr -d 'bytes = '`
 	bits=`prhdr *myseg.armap.* | grep 'bits' | tr -d 'bits = '`
     regions=`grep 'regions remain' myseg.log | tail -1 | tr -d 'regions remain after this pass'`
     
+    echo katia: $bytes
     if [ $bytes -eq 3 -o $bytes -eq 4 ]; then
         # Create interp file
         echo "1 1" > interplut
