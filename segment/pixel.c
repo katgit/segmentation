@@ -3,6 +3,10 @@ static char     SCCS_ID[] = "pixel.c 2.3  5/5/89";
 
 #endif
 
+#define	MAX(a, b)		( (a) > (b) ? (a) : (b) )
+#define	MIN(a, b)		( (a) < (b) ? (a) : (b) )
+
+
 #include "segment.h"
 
 /*

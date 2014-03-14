@@ -122,9 +122,13 @@ function do_seg {
     fi
 
     # IPW command: Do the segmentation
+    echo "EIGHT=$EIGHT"
     if [ $EIGHT -eq 1 ]; then
         segment -t $tol -m $merge -n $varN -b 1 -o $OUTF ../${IMAGEFILE}.ipw | tee myseg.log    
     elif [ $EIGHT -eq 0 ]; then
+	echo "Output directory is $OUTF"
+#        gdb --args segment -t $tol -m $merge -n $varN -b 1 -o $OUTF /projectnb/scv/katia/projects/segmentation/2014_segment/${IMAGEFILE}.ipw 
+
         segment -t $tol -m $merge -n $varN -b 1 -o $OUTF ../${IMAGEFILE}.ipw | tee myseg.log
     fi
 

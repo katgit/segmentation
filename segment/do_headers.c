@@ -16,6 +16,8 @@ int             mfd;
     BIH_T         **i_bihpp;	/* -> input BIH */
     BIH_T         **m_bihpp;	/* -> mask BIH */
 
+    FILE *fp;
+
  /*
   * read input BIH
   */
@@ -71,5 +73,17 @@ int             mfd;
 
 	skiphdrs(mfd);
     }
+
+    fp=fopen("original_spr_bin","wb");
+
+    if (!fp){
+      printf("Unable to open file!");
+      return;
+    }
+
+    fwrite(&Spr, sizeof(Spr), 1, fp);
+
+    fclose(fp);
+
 }
 

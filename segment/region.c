@@ -3,6 +3,10 @@ static char     SCCS_ID[] = "region.c 2.10  9/5/94";
 
 #endif
 
+#define	MAX(a, b)		( (a) > (b) ? (a) : (b) )
+#define	MIN(a, b)		( (a) < (b) ? (a) : (b) )
+
+
 #include "segment.h"
 #include "set.h"
 

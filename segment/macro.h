@@ -56,8 +56,8 @@
  */
 
 #define	DTR(d)			( (d) * (PI / 180.0) )
-#define	MAX(a, b)		( (a) > (b) ? (a) : (b) )
-#define	MIN(a, b)		( (a) < (b) ? (a) : (b) )
+//define	MAX(a, b)		( (a) > (b) ? (a) : (b) )
+//define	MIN(a, b)		( (a) < (b) ? (a) : (b) )
 #define	OK_FD(fd)		( (fd) >= 0  &&  (fd) < OPEN_MAX )
 #define	ROUND(x)		( (x) < 0 ? (x) - 0.5 : (x) + 0.5 )
 #define	SAFE_FREE(p)		if ((p) != NULL) free(p)

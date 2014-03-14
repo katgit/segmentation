@@ -204,6 +204,8 @@ static char     SCCS_ID[] = "main.c 2.11  6/22/92";
 
 #include "getargs.h"
 
+int header_read(OPTION_T operands,seg_proc *);
+
 main(argc, argv)
 int             argc;
 char          **argv;
@@ -493,6 +495,10 @@ char          **argv;
 	fdi = ustdin();
     } else {
       printf("Using uropen ...\n");
+
+      //katia
+      if(header_read(operands,&sproc) <0) printf("Error in header_read\n");
+
 	fdi = uropen(str_arg(operands, 0));
 	if (fdi == ERROR) {
 	    error("can't open input image file \"%s\"", str_arg(operands, 0));
