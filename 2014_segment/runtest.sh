@@ -16,7 +16,7 @@ module purge
 module load gdal/1.10.0
 #module load ipw/1.1.0
 module load envi/4.8
-
+   
 # Assure recompile segment program is selected
 export PATH=/projectnb/scv/katia/projects/segmentation/segment:$PATH
 
