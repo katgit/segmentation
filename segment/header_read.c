@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 #include <gdal.h>
 //include "cpl_conv.h"
@@ -13,19 +14,32 @@ int header_read( OPTION_T_OP operands, Seg_proc Spr){
 
   char **papszMetadata = NULL;
   int i;
+  char* header_name;
 
   // initializae GDAL library
 
+  //system("pwd");
+  printf("Before dying\n");
 
   printf("In header_read file is %s\n",(operands.args.astr_p)[0]);
-  return(0);
+  printf("After dying\n");
 
+
+  strncpy(header_name,(operands.args.astr_p)[0],strlen((operands.args.astr_p)[0])-7);
+
+  header_name = strcat(header_name,"bsq\0");
+  //strcpy(header_name, header_name+1);
+  printf("header_name = *%s*\n", header_name);
+  printf("String compare %d\n",strcmp(header_name,"../testsmall.bsq"));
+
+
+  // register GDAL
   GDALAllRegister();
 
 
-  char* header_name;
-
   // open bip file
+  //hDataset = GDALOpen("../testsmall.bsq" , GA_ReadOnly ); 
+  //hDataset = GDALOpen("/projectnb/scv/katia/projects/segmentation/2014_segment/testsmall.bsq" , GA_ReadOnly ); 
   hDataset = GDALOpen( header_name, GA_ReadOnly );
   if (hDataset == NULL){
     printf("Error openning header bip file\n");

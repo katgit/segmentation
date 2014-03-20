@@ -29,7 +29,7 @@ function do_seg {
     IMAGEFILE=`basename $IMAGE`
 
     echo $IMAGEDIR
-
+    
     cd $IMAGEDIR
 
     # Find the image header
@@ -124,11 +124,12 @@ function do_seg {
     # IPW command: Do the segmentation
     echo "EIGHT=$EIGHT"
     if [ $EIGHT -eq 1 ]; then
+	echo: "Katia: Enter segment"
         segment -t $tol -m $merge -n $varN -b 1 -o $OUTF ../${IMAGEFILE}.ipw | tee myseg.log    
     elif [ $EIGHT -eq 0 ]; then
 	echo "Output directory is $OUTF"
 #        gdb --args segment -t $tol -m $merge -n $varN -b 1 -o $OUTF /projectnb/scv/katia/projects/segmentation/2014_segment/${IMAGEFILE}.ipw 
-
+	echo "Katia: Calling segment for EIGHT=0"
         segment -t $tol -m $merge -n $varN -b 1 -o $OUTF ../${IMAGEFILE}.ipw | tee myseg.log
     fi
 
@@ -190,6 +191,7 @@ function do_seg {
 		fi
     fi
 
+    echo "Katia: Passed if bytes POLY=$POLY"
     # Generate an ESRI shapefile of regionmap?
 	if [ $POLY -eq 1 ]; then
 		# Create regionmap shapefiles
@@ -210,6 +212,7 @@ function do_seg {
 
     cd ..
     cd $CD
+    echo "Katia: end of the function"
 }
 
 # POLY: boolean - produce shapefile?
@@ -221,6 +224,7 @@ bOUTF=0
 OUTF=''
 
 CD=`pwd`
+echo "CD=$CD"
 
 while getopts "hi:p:s" OPTION
     do
@@ -271,4 +275,6 @@ else
 	    do
 	        do_seg
 	done < $PFILE
+	
 fi
+echo "Katia: Leaving batch_segment"

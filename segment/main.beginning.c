@@ -333,11 +333,14 @@ char          **argv;
   * begin
   */
     printf("Segment: begining\n");
+return(0);
     ipwenter(argc, argv, optv, "segment an image");
     printf("Segment: after ipwenter\n");
  /*
+ 
   * Establish default values.
   */
+
     sproc.i_bihpp = NULL;
     sproc.l_bihpp = NULL;
     sproc.r_bihpp[0] = NULL;
@@ -487,7 +490,7 @@ char          **argv;
     if (sproc.cm < 1.0) {
 	sf_set(&sproc, SF_HIST);
     }
-//return(0);
+
  /*
   * access input file
   */
@@ -500,7 +503,7 @@ char          **argv;
 
       //katia
       
-//      if(header_read(operands,&sproc) <0) printf("Error in header_read\n");
+      if(header_read(operands,&sproc) <0) printf("Error in header_read\n");
 
 	fdi = uropen(str_arg(operands, 0));
 	if (fdi == ERROR) {
@@ -525,7 +528,6 @@ char          **argv;
  /*
   * Process image headers
   */
-//return(0);
     do_headers(&sproc, fdi, fdm);
 
  /*
