@@ -119,8 +119,8 @@ function do_seg {
     echo "Check files"
     pwd
     ls -l
-    cp -v ../testsmall.hdr .
-    cp -v ../testsmall.bsq .
+    #cp -v ../testsmall.hdr .
+    #cp -v ../testsmall.bsq .
     
     # If user didn't specify filename, make one
     if [ $bOUTF -eq 0 ]; then
@@ -131,12 +131,14 @@ function do_seg {
     echo "EIGHT=$EIGHT"
     if [ $EIGHT -eq 1 ]; then
 	echo: "Katia: Enter segment"
-        segment -t $tol -m $merge -n $varN -b 1 -o $OUTF ../${IMAGEFILE}.ipw | tee myseg.log    
+        segment -t $tol -m $merge -n $varN -b 1 -o $OUTF "../${IMAGEFILE}.ipw" | tee myseg.log    
+        #segment -t $tol -m $merge -n $varN -b 1 -o $OUTF "/projectnb/scv/katia/project/segmentation/2014_segment/${IMAGEFILE}.ipw" | tee myseg.log    
     elif [ $EIGHT -eq 0 ]; then
 	echo "Output directory is $OUTF"
 #        gdb --args segment -t $tol -m $merge -n $varN -b 1 -o $OUTF /projectnb/scv/katia/projects/segmentation/2014_segment/${IMAGEFILE}.ipw 
 	echo "Katia: Calling segment for EIGHT=0"
-        segment -t $tol -m $merge -n $varN -b 1 -o $OUTF ../${IMAGEFILE}.ipw | tee myseg.log
+        segment -t $tol -m $merge -n $varN -b 1 -o $OUTF "../${IMAGEFILE}.ipw" | tee myseg.log
+        #segment -t $tol -m $merge -n $varN -b 1 -o $OUTF "/projectnb/scv/katia/project/segmentation/2014_segment/${IMAGEFILE}.ipw" | tee myseg.log
     fi
 
     ls *myseg.armap.*

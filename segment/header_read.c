@@ -24,42 +24,40 @@ int header_read( OPTION_T_OP operands, Seg_proc Spr){
   GDALDatasetH hDataset=NULL;
 
   char **papszMetadata = NULL;
-  int i;
-  char* header_name;
+  int i,j;
+  char header_name[512];
   char cmd[256];
+  int ierr;
+  int len;
+
 
   // initializae GDAL library
+  //printf("In header_read file is %s\n",(operands.args.astr_p)[0]);
 
-  //system("pwd");
-  printf("Before dying\n");
+  printf("Our header file from command *%s*\n",operands.args.astr_p[0]);
 
-  printf("In header_read file is %s\n",(operands.args.astr_p)[0]);
-  printf("After dying\n");
-
-
-  strncpy(header_name,(operands.args.astr_p)[0],strlen((operands.args.astr_p)[0])-7);
-
-  header_name = strcat(header_name,"bsq\0");
-  //strcpy(header_name, header_name+1);
-  printf("header_name = *%s*\n", header_name);
-  printf("String compare %d\n",strcmp(header_name,"../testsmall.bsq"));
+  len=strlen((operands.args.astr_p)[0])-4 ;
+  for(i=0; i<len;i++){
+      header_name[i]=*((operands.args.astr_p)[0]+i);
+      printf("Copied char %c\n",header_name[i]);
+  }
+  printf("Our new header file  *%s*\n", header_name);
 
 
   // register GDAL
   GDALAllRegister();
-
   
   // convert from BSQ to BIP format
-  if (file_exists("temp.bip")) unlink("temp.bip");
-  if (file_exists(header_name))printf("Header file exists!\n");
+  if (file_exists("temp_bip")) unlink("temp_bip");
+  if (file_exists(header_name))printf("Header file *%s* exists!\n", header_name);
 
-  sprintf(cmd,"gdal_translate -of ENVI -ot Byte -scale -co INTERLEAVE=BIP -co SUFFIX=ADD testsmall.bsq temp_bip");
+  //sprintf(cmd,"gdal_translate -of ENVI -ot Byte -scale -co INTERLEAVE=BIP -co SUFFIX=ADD ../testsmall.bsq temp_bip", header_name);
+  sprintf(cmd,"gdal_translate -of ENVI -ot Byte -scale -co INTERLEAVE=BIP -co SUFFIX=ADD %s temp_bip", header_name);
   printf("---- %s\n",cmd);
-  if( ! system(cmd) )printf ("Conversion of bsq to bip is unsecceeful ...\n");
+  ierr= system(cmd) ;
+  printf ("Conversion of bsq to bip: error code=%d \n", ierr);
 
   // open bip file
-  //hDataset = GDALOpen("../testsmall.bsq" , GA_ReadOnly ); 
-  //hDataset = GDALOpen("/projectnb/scv/katia/projects/segmentation/2014_segment/testsmall.bsq" , GA_ReadOnly ); 
   hDataset = GDALOpen( "temp_bip", GA_ReadOnly );
   if (hDataset == NULL){
     printf("Error openning header bip file\n");
@@ -68,7 +66,6 @@ int header_read( OPTION_T_OP operands, Seg_proc Spr){
     printf("Header Bip file openned correctly!\n");
   }
 
-  
   // read metadata from bip file
   papszMetadata = GDALGetMetadata( hDataset, "ENVI" );
   if (papszMetadata == NULL){

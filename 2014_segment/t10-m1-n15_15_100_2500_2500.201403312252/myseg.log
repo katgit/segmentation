@@ -1,0 +1,28 @@
+Segment: begining
+Segment: after ipwenter
+Segment: Checking neighbours
+Segment: checking other arguments
+Using uropen ...
+Header file *../testsmall.bsq* exists!
+---- gdal_translate -of ENVI -ot Byte -scale -co INTERLEAVE=BIP -co SUFFIX=ADD ../testsmall.bsq temp_bip
+Conversion of bsq to bip: error code=256 
+Error openning header bip file
+Error in header_read
+Input image has 4 bands, 19 samples, and 22 lines
+The segmentation tolerance is 10.000000
+The merge coefficient is 0.100000
+
+Completed the calculation of pixel nearest neighbors
+Initial pass over image completed
+384 of a possible 418 regions are required
+
+Predicted maximum memory usage in data segment:
+	neighbor set:	20000
+	image bands:	2772
+	region list:	13896
+
+Creating region list
+Region list created
+
+About to perform first general pass over region list
+

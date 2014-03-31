@@ -1,0 +1,25 @@
+Segment: begining
+Segment: after ipwenter
+Segment: Checking neighbours
+Segment: checking other arguments
+Using uropen ...
+Our header file from command */projectnb/scv/katia/project/segmentation/2014_segment/testsmall.bsq.ipw*
+Copied char t
+Copied char e
+Copied char s
+Copied char t
+Copied char s
+Copied char m
+Copied char a
+Copied char l
+Copied char l
+Copied char .
+Copied char b
+Copied char s
+Copied char q
+Our new header file  *€mý1s*
+Header file *€mý1s* exists!
+---- gdal_translate -of ENVI -ot Byte -scale -co INTERLEAVE=BIP -co SUFFIX=ADD €mý1s temp_bip
+Conversion of bsq to bip: error code=256 
+Error openning header bip file
+Error in header_read
