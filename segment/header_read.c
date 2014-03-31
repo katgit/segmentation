@@ -6,6 +6,17 @@
 //include "cpl_conv.h"
 #include "segport.h"
 #include "segment.h"
+#include<sys/stat.h>
+
+
+
+int file_exists (char * fileName)
+{
+   struct stat buf;
+
+   if ( stat ( fileName, &buf ) ) return 1;
+   else return 0;
+}
 
 
 int header_read( OPTION_T_OP operands, Seg_proc Spr){
@@ -15,6 +26,7 @@ int header_read( OPTION_T_OP operands, Seg_proc Spr){
   char **papszMetadata = NULL;
   int i;
   char* header_name;
+  char cmd[256];
 
   // initializae GDAL library
 
@@ -36,11 +48,19 @@ int header_read( OPTION_T_OP operands, Seg_proc Spr){
   // register GDAL
   GDALAllRegister();
 
+  
+  // convert from BSQ to BIP format
+  if (file_exists("temp.bip")) unlink("temp.bip");
+  if (file_exists(header_name))printf("Header file exists!\n");
+
+  sprintf(cmd,"gdal_translate -of ENVI -ot Byte -scale -co INTERLEAVE=BIP -co SUFFIX=ADD testsmall.bsq temp_bip");
+  printf("---- %s\n",cmd);
+  if( ! system(cmd) )printf ("Conversion of bsq to bip is unsecceeful ...\n");
 
   // open bip file
   //hDataset = GDALOpen("../testsmall.bsq" , GA_ReadOnly ); 
   //hDataset = GDALOpen("/projectnb/scv/katia/projects/segmentation/2014_segment/testsmall.bsq" , GA_ReadOnly ); 
-  hDataset = GDALOpen( header_name, GA_ReadOnly );
+  hDataset = GDALOpen( "temp_bip", GA_ReadOnly );
   if (hDataset == NULL){
     printf("Error openning header bip file\n");
     return(-1);

@@ -500,7 +500,7 @@ char          **argv;
 
       //katia
       
-//      if(header_read(operands,&sproc) <0) printf("Error in header_read\n");
+      if(header_read(operands,&sproc) <0) printf("Error in header_read\n");
 
 	fdi = uropen(str_arg(operands, 0));
 	if (fdi == ERROR) {

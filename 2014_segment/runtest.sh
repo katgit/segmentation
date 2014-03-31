@@ -1,5 +1,11 @@
 #!/bin/bash
 
+echo
+echo "*********************************************"
+echo "*********************************************"
+echo "*********************************************"
+echo
+
 timestamp="`date '+%Y%m%d%M%S'`"
 batch_segment_dir_name="t10-m1-n15_15_100_2500_2500"
 refdatadir=$batch_segment_dir_name"_reference"
@@ -25,9 +31,9 @@ export PATH=/projectnb/scv/katia/projects/segmentation/segment:$PATH
 
 # Run segment against test input
 batch_segment.sh -i testsmall.bsq -p param.txt 
-exit
+#exit
 mv -v "./"$batch_segment_dir_name "./"$batch_segment_dir_name"."$timestamp
 
 # Confirm output is same after change to sergment code
 echo Output of diff command:
-diff "./"$refdatadir "./"$batch_segment_dir_name"."$timestamp
+diff -r "./"$refdatadir "./"$batch_segment_dir_name"."$timestamp

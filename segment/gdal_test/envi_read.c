@@ -17,10 +17,9 @@ int main(int argc, char ** argv){
   
   // make sure we have input and output file
   if(argc <3) {
-    printf("usage: envi_read <inputfile> <outputfile>\n");
-    //return(0);
+    //printf("usage: envi_read <inputfile> <outputfile>\n");
     printf("Using default file names!\n");
-    sprintf(cmd,"gdal_translate -of ENVI -ot Byte -scale -co INTERLEAVE=BIP -co SUFFIX=ADD testsmall.bsq temp_byte_bip" );
+    sprintf(cmd," echo 'gdal_translate -of ENVI -ot Byte -scale -co INTERLEAVE=BIP -co SUFFIX=ADD testsmall.bsq temp_byte_bip' >our_envi.out" );
   }else{
 
   // prepare a string for the system command

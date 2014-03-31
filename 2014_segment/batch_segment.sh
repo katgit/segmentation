@@ -115,6 +115,12 @@ function do_seg {
         mkdir $dir
     	cd $dir
     fi
+    #copy header files into this directory
+    echo "Check files"
+    pwd
+    ls -l
+    cp -v ../testsmall.hdr .
+    cp -v ../testsmall.bsq .
     
     # If user didn't specify filename, make one
     if [ $bOUTF -eq 0 ]; then
