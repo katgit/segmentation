@@ -8,7 +8,7 @@
 #include "segment.h"
 #include<sys/stat.h>
 
-
+#include <regex.h>        
 
 int file_exists (char * fileName)
 {
@@ -30,6 +30,10 @@ int header_read( OPTION_T_OP operands, Seg_proc Spr){
   int ierr;
   int len;
 
+  regex_t regex;
+  int reti;
+  char msgbuf[100];
+
 
   // initializae GDAL library
   //printf("In header_read file is %s\n",(operands.args.astr_p)[0]);
@@ -39,14 +43,16 @@ int header_read( OPTION_T_OP operands, Seg_proc Spr){
   len=strlen((operands.args.astr_p)[0])-4 ;
   for(i=0; i<len;i++){
       header_name[i]=*((operands.args.astr_p)[0]+i);
-      printf("Copied char %c\n",header_name[i]);
+      //printf("Copied char %c\n",header_name[i]);
   }
   printf("Our new header file  *%s*\n", header_name);
 
 
   // register GDAL
   GDALAllRegister();
-  
+
+  sf_set(Spr, SF_MASK);
+
   // convert from BSQ to BIP format
   if (file_exists("temp_bip")) unlink("temp_bip");
   if (file_exists(header_name))printf("Header file *%s* exists!\n", header_name);
@@ -80,6 +86,46 @@ int header_read( OPTION_T_OP operands, Seg_proc Spr){
     }
 
   }
+
+
+  /* Compile regular expression */
+  reti = regcomp(&regex, "[0-9]+", 0);
+  if( reti ){ fprintf(stderr, "Could not compile regex\n"); exit(1); }
+
+  /* Execute regular expression */
+  reti = regexec(&regex, "samples = 19", 0, NULL, 0);
+  if( !reti ){
+    puts("Match");
+  }
+  else if( reti == REG_NOMATCH ){
+    puts("No match");
+  }
+  else{
+    regerror(reti, &regex, msgbuf, sizeof(msgbuf));
+    fprintf(stderr, "Regex match failed: %s\n", msgbuf);
+    exit(1);
+  }
+
+/* Free compiled regular expression if you want to use the regex_t again */
+    regfree(&regex);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   
   // close bip file 
   GDALClose(hDataset);
