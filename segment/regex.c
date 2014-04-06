@@ -23,7 +23,7 @@ void main(){
     regex_t regex;
 
   /* Compile regular expression */
-  reti = regcomp(&regex, "^samples :[[:alnum:]]", 0);
+  reti = regcomp(&regex, "^samples", 0);
   if( reti ){ fprintf(stderr, "Could not compile regex\n"); exit(1); }
 
   /* Execute regular expression */
