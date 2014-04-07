@@ -46,6 +46,10 @@
 #include <limits.h>
 #endif
 
+#ifndef  MAX_INPUT 
+#define MAX_INPUT 512 
+#endif
+
 #include <unistd.h>
 #include <stdio.h>
 

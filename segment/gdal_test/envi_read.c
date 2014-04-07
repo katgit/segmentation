@@ -42,7 +42,7 @@ int main(int argc, char ** argv){
   if (papszMetadata == NULL){
     printf("no metadata...\n");
   } else{
-    printf("Read metadata!\n");
+    printf("Read metadata in envi_read.c!\n");
 
     // print the matadata to the screen
     for (i=0; i< 13; i++){

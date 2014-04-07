@@ -33,6 +33,7 @@ export PATH=/projectnb/scv/katia/projects/segmentation/segment:$PATH
 batch_segment.sh -i testsmall.bsq -p param.txt 
 #exit
 mv -v "./"$batch_segment_dir_name "./"$batch_segment_dir_name"."$timestamp
+exit
 
 # Confirm output is same after change to sergment code
 echo Output of diff command:

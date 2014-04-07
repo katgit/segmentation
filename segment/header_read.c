@@ -78,54 +78,14 @@ int header_read( OPTION_T_OP operands, Seg_proc Spr){
     printf("no metadata...\n");
     return(-2);
   } else{
-    printf("Read metadata!\n");
+    printf("Read metadata! zz\n");
 
     // print the matadata to the screen
     for (i=0; i< 13; i++){
-      printf("%s\n",papszMetadata[i]);
+      printf("line %d: %s\n",i,papszMetadata[i]);
     }
 
   }
-
-
-  /* Compile regular expression */
-  reti = regcomp(&regex, "[0-9]+", 0);
-  if( reti ){ fprintf(stderr, "Could not compile regex\n"); exit(1); }
-
-  /* Execute regular expression */
-  reti = regexec(&regex, "samples = 19", 0, NULL, 0);
-  if( !reti ){
-    puts("Match");
-  }
-  else if( reti == REG_NOMATCH ){
-    puts("No match");
-  }
-  else{
-    regerror(reti, &regex, msgbuf, sizeof(msgbuf));
-    fprintf(stderr, "Regex match failed: %s\n", msgbuf);
-    exit(1);
-  }
-
-/* Free compiled regular expression if you want to use the regex_t again */
-    regfree(&regex);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   
   // close bip file 
   GDALClose(hDataset);
