@@ -3,6 +3,8 @@
 # Chris Holden
 # 02-15-2012
 
+echo "Entering batch_segment.sh donj"
+
 prhdr="/project/earth/packages/ipw-1.1.0/bin/prhdr";
 
 function usage() {
@@ -137,6 +139,7 @@ function do_seg {
 	echo "Output directory is $OUTF"
 #        gdb --args segment -t $tol -m $merge -n $varN -b 1 -o $OUTF /projectnb/scv/katia/projects/segmentation/2014_segment/${IMAGEFILE}.ipw 
 	echo "Katia: Calling segment for EIGHT=0"
+		echo "Executing ""`which segment`"" donj"
         segment -t $tol -m $merge -n $varN -b 1 -o $OUTF "../${IMAGEFILE}.ipw" | tee myseg.log
         #segment -t $tol -m $merge -n $varN -b 1 -o $OUTF "/projectnb/scv/katia/project/segmentation/2014_segment/${IMAGEFILE}.ipw" | tee myseg.log
     fi
@@ -281,6 +284,7 @@ elif [ "$IMAGE" == "" ]; then
 else
 	while read params
 	    do
+			echo "Executing do_seg donj"
 	        do_seg
 	done < $PFILE
 	

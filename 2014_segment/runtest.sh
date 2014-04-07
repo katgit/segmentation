@@ -24,7 +24,11 @@ module load gdal/1.10.0
 module load envi/4.8
    
 # Assure recompile segment program is selected
-export PATH=/projectnb/scv/katia/projects/segmentation/segment:$PATH
+#export PATH=/projectnb/scv/katia/projects/segmentation/segment:$PATH
+pushd ..
+export PATH=`pwd`/segment:$PATH
+popd
+echo $PATH
 
 # Set aside previous outpu
 #mkdir "./"$datadir
