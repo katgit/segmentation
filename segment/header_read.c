@@ -45,6 +45,7 @@ int header_read( OPTION_T_OP operands, Seg_proc Spr){
       header_name[i]=*((operands.args.astr_p)[0]+i);
       //printf("Copied char %c\n",header_name[i]);
   }
+  header_name[len]='\0';
   printf("Our new header file  *%s*\n", header_name);
 
 

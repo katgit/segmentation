@@ -9,10 +9,13 @@ INCLUDE_FILES=segment.h set.h
 EXECUTABLE = segment
 
 .SUFFIXES:
-.SUFFIXES: .c .o 
+.SUFFIXES: .c .cpp .o 
+
+%.o: %.cpp
+	g++ -g -c $<
 
 %.o: %.c
-	gcc -std=c99 -g -c $< 
+	gcc -g -c $< 
 
 $(EXECUTABLE): $(OBJECTS)
 	gcc -o $@ $(OBJECTS) $(LIBRARY) 
