@@ -144,7 +144,10 @@ function do_seg {
         #segment -t $tol -m $merge -n $varN -b 1 -o $OUTF "/projectnb/scv/katia/project/segmentation/2014_segment/${IMAGEFILE}.ipw" | tee myseg.log
     fi
 
+	echo "Looking for armap files in "`pwd`" donj" 
     ls *myseg.armap.*
+	exit
+
     bytes=`$prhdr *myseg.armap.* | grep 'bytes' | tr -d 'bytes = '`
 	bits=`$prhdr *myseg.armap.* | grep 'bits' | tr -d 'bits = '`
     regions=`grep 'regions remain' myseg.log | tail -1 | tr -d 'regions remain after this pass'`
