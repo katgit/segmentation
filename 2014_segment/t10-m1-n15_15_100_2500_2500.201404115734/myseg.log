@@ -1,0 +1,36 @@
+Input file size is 19, 22
+0...10...20...30...40...50...60...70...80...90...100 - done.
+myseg.log
+temp_bip
+temp_bip.aux.xml
+temp_bip.hdr
+Segment: begining
+Segment: after ipwenter
+Segment: Checking neighbours
+Segment: checking other arguments
+Using uropen ...
+Our header file from command *../testsmall.bsq.ipw*
+Copied char .
+Copied char .
+Copied char /
+Copied char t
+Copied char e
+Copied char s
+Copied char t
+Copied char s
+Copied char m
+Copied char a
+Copied char l
+Copied char l
+Copied char .
+Copied char b
+Copied char s
+Copied char q
+Our new header file  *../testsmall.bsq*
+---- gdal_translate -of ENVI -ot Byte -scale -co INTERLEAVE=BIP -co SUFFIX=ADD ../testsmall.bsq temp_bip
+Conversion of bsq to bip: error code=0 
+before do_headers
+do_headers step 1
+do_headers step 2
+do_headers step 3
+do_headers step 4

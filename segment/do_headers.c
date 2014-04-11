@@ -18,10 +18,13 @@ int             mfd;
 
     FILE *fp;
 
+printf("do_headers step 1\n");
+
  /*
   * read input BIH
   */
     i_bihpp = bihread(ifd);
+printf("do_headers step 2\n");
     if (i_bihpp == NULL) {
 	error("can't read basic image header for input file");
     }
@@ -40,6 +43,7 @@ int             mfd;
  /*
   * Check that all bands are 8 bit
   */
+printf("do_headers step 3\n");
     for (band = 0; band < Spr->nbands; band++) {
 	if (bih_nbytes(i_bihpp[band]) != 1 ||
 	    bih_nbits(i_bihpp[band]) != 8)
@@ -51,6 +55,7 @@ int             mfd;
  /*
   * Skip other input headers
   */
+printf("do_headers step 4\n");
     skiphdrs(ifd);
 
  /*
@@ -74,7 +79,9 @@ int             mfd;
 	skiphdrs(mfd);
     }
 
+printf("do_headers step 5\n");
     fp=fopen("original_spr_bin","wb");
+printf("do_headers step 6\n");
 
     if (!fp){
       printf("Unable to open file!");
@@ -84,6 +91,7 @@ int             mfd;
     fwrite(&Spr, sizeof(Spr), 1, fp);
 
     fclose(fp);
+printf("do_headers step 7\n");
 
 }
 

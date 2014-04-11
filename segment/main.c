@@ -324,6 +324,7 @@ char          **argv;
 
 
     seg_proc        sproc;	/* struct that maintains segmentation state */
+    seg_proc        sproc_dummy;	/* struct that maintains segmentation state */
     int             fdi = -1;	/* input image file descriptor	 */
     int             fdm = -1;	/* mask image file descriptor	 */
     int             i;		/* index */
@@ -526,7 +527,9 @@ char          **argv;
   * Process image headers
   */
 //return(0);
+printf("before do_headers\n");
     do_headers(&sproc, fdi, fdm);
+printf("after do_headers\n");
 
  /*
   * Check that the log band specification is legal

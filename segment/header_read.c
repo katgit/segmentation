@@ -33,7 +33,8 @@ int header_read( OPTION_T_OP operands, Seg_proc Spr){
   regex_t regex;
   int reti;
   char msgbuf[100];
-
+  int dummy=0;
+  char sdummy[256];
 
   // initializae GDAL library
   //printf("In header_read file is %s\n",(operands.args.astr_p)[0]);
@@ -43,7 +44,7 @@ int header_read( OPTION_T_OP operands, Seg_proc Spr){
   len=strlen((operands.args.astr_p)[0])-4 ;
   for(i=0; i<len;i++){
       header_name[i]=*((operands.args.astr_p)[0]+i);
-      //printf("Copied char %c\n",header_name[i]);
+      printf("Copied char %c\n",header_name[i]);
   }
   header_name[len]='\0';
   printf("Our new header file  *%s*\n", header_name);
@@ -52,7 +53,7 @@ int header_read( OPTION_T_OP operands, Seg_proc Spr){
   // register GDAL
   GDALAllRegister();
 
-  sf_set(Spr, SF_MASK);
+  //sf_set(Spr, SF_MASK);
 
   // convert from BSQ to BIP format
   if (file_exists("temp_bip")) unlink("temp_bip");
@@ -66,11 +67,12 @@ int header_read( OPTION_T_OP operands, Seg_proc Spr){
 
   // open bip file
   hDataset = GDALOpen( "temp_bip", GA_ReadOnly );
+
   if (hDataset == NULL){
-    printf("Error openning header bip file\n");
+    printf("Error opening header bip file\n");
     return(-1);
   } else{
-    printf("Header Bip file openned correctly!\n");
+    printf("Header Bip file opened correctly!\n");
   }
 
   // read metadata from bip file
@@ -83,51 +85,19 @@ int header_read( OPTION_T_OP operands, Seg_proc Spr){
 
     // print the matadata to the screen
     for (i=0; i< 13; i++){
-      printf("%s\n",papszMetadata[i]);
+      printf("%i: %s\n",i,papszMetadata[i]);
+	if(i==1){
+	  ierr=get_header_field_value(papszMetadata[i], "bands", 1, &dummy, NULL);
+	  printf("No. of bands from regex function: %d\n", dummy);
+	}
+	if(i==6){
+	  ierr=get_header_field_value(papszMetadata[i], "file_type", 2, NULL, sdummy);
+	  printf("File type from regex function: %s\n", sdummy);
+	}
     }
 
   }
 
-
-  /* Compile regular expression */
-  reti = regcomp(&regex, "[0-9]+", 0);
-  if( reti ){ fprintf(stderr, "Could not compile regex\n"); exit(1); }
-
-  /* Execute regular expression */
-  reti = regexec(&regex, "samples = 19", 0, NULL, 0);
-  if( !reti ){
-    puts("Match");
-  }
-  else if( reti == REG_NOMATCH ){
-    puts("No match");
-  }
-  else{
-    regerror(reti, &regex, msgbuf, sizeof(msgbuf));
-    fprintf(stderr, "Regex match failed: %s\n", msgbuf);
-    exit(1);
-  }
-
-/* Free compiled regular expression if you want to use the regex_t again */
-    regfree(&regex);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
   // close bip file 
   GDALClose(hDataset);
 

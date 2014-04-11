@@ -40,4 +40,4 @@ mv -v "./"$batch_segment_dir_name "./"$batch_segment_dir_name"."$timestamp
 
 # Confirm output is same after change to sergment code
 echo Output of diff command:
-diff -r "./"$refdatadir "./"$batch_segment_dir_name"."$timestamp
+#diff -r "./"$refdatadir "./"$batch_segment_dir_name"."$timestamp

@@ -1,0 +1,5 @@
+ls.txt
+myseg.log
+temp_bip
+temp_bip.aux.xml
+temp_bip.hdr

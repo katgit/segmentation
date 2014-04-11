@@ -29,5 +29,6 @@ typedef struct {
 	ARGS_T          args;
 } OPTION_T_OP;
 
+int get_header_field_value(char* line, const char* field_name, int field_type, int* pval, char* sval);
 
 #endif
