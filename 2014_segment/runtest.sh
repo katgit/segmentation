@@ -24,7 +24,11 @@ module load gdal/1.10.0
 module load envi/4.8
    
 # Assure recompile segment program is selected
+<<<<<<< HEAD
 export PATH=/projectnb/scv/katia/projects/segmentation/segment:$PATH
+=======
+#export PATH=/projectnb/scv/katia/projects/segmentation/segment:$PATH
+>>>>>>> b7b0cde9e1d370cb22061a8ea121622ce8155651
 pushd ..
 export PATH=`pwd`/segment:$PATH
 popd
@@ -37,6 +41,7 @@ echo $PATH
 batch_segment.sh -i testsmall.bsq -p param.txt 
 #exit
 mv -v "./"$batch_segment_dir_name "./"$batch_segment_dir_name"."$timestamp
+exit
 
 # Confirm output is same after change to sergment code
 echo Output of diff command:

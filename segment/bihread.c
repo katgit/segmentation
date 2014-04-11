@@ -22,6 +22,7 @@
 
 /* LINTLIBRARY */
 
+#include "segport.h" 
 #include "ipw.h"
 
 #include "hdrio.h"

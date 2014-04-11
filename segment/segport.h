@@ -3,7 +3,6 @@
 #ifndef	SEGPORT_H
 #define	SEGPORT_H
 
-
 typedef int     aint_t;
 typedef long    along_t;
 typedef double  areal_t;
@@ -29,5 +28,6 @@ typedef struct {
 	ARGS_T          args;
 } OPTION_T_OP;
 
+//int get_header_field_value(const char* line, const char* field_name, int field_type, int* pval, char* sval);
 
 #endif
