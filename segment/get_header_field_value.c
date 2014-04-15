@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <regex.h>        
+#include "trim.h"
 
 #define DEBUG 1
 
@@ -31,7 +32,7 @@ int get_header_field_value(char* line, const char* field_name, int field_type, i
 	if(field_type == 1){
 		s2="[[:blank:]]*=[[:blank:]]*)([0-9]+)([[:blank:]]*)$";
 	} else if(field_type == 2){
-		s2="[[:blank:]]*=[[:blank:]]*)([[:alnum:]]+)([[:blank:]]*)";
+		s2="[[:blank:]]*=[[:blank:]]*)(.+)$";
 	} else {
 		fprintf(stderr, "Field type can be only 1 or 2\n");
 		return(1);
@@ -74,7 +75,8 @@ int get_header_field_value(char* line, const char* field_name, int field_type, i
 				printf("Val: *%s* %d\n",stemp,atoi(stemp));
 			}
 		} else if(field_type == 2){
-			strcpy(sval,stemp);
+			//strcpy(sval,stemp);
+			sval=trim(stemp);
 			if(DEBUG){
 				printf("Val: *%s*\n",sval);
 			}
