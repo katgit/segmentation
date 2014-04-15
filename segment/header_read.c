@@ -39,6 +39,9 @@ int header_read( OPTION_T_OP operands, Seg_proc Spr){
   // initializae GDAL library
   //printf("In header_read file is %s\n",(operands.args.astr_p)[0]);
 
+  
+
+
   printf("Our header file from command *%s*\n",operands.args.astr_p[0]);
 
   len=strlen((operands.args.astr_p)[0])-4 ;
@@ -54,6 +57,7 @@ int header_read( OPTION_T_OP operands, Seg_proc Spr){
   GDALAllRegister();
 
   //sf_set(Spr, SF_MASK);
+
 
   // convert from BSQ to BIP format
   if (file_exists("temp_bip")) unlink("temp_bip");

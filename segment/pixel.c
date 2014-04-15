@@ -154,6 +154,7 @@ int             nsamps;
 	!= image_size) {
 	error("image read failed, bytes read = %d", bytes_read);
     }
+	printf("No. of image bytes read: %d\n",bytes_read);
     return (image);
 }
 
