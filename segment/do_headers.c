@@ -40,6 +40,9 @@ printf("do_headers step 2\n");
     if (Spr->nbands > MAXSHORT)
 	error("Image has too many (%d) bands\n", Spr->nbands);
 
+
+    printf("------ i_bihpp=%d nlines=%d nsamps=%d nbands=%d\n",Spr->i_bihpp, Spr->nlines, Spr->nsamps, Spr->nbands);
+
  /*
   * Check that all bands are 8 bit
   */

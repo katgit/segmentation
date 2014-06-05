@@ -531,6 +531,9 @@ printf("before do_headers\n");
     do_headers(&sproc, fdi, fdm);
 printf("after do_headers\n");
 
+ printf("GDAL sproc.nline=%d\n",sproc.nlines);
+ printf("GDAL sproc.nline=%d\n",sproc.nsamps);
+ printf("GDAL sproc.nline=%d\n",sproc.nbands);
  /*
   * Check that the log band specification is legal
   */

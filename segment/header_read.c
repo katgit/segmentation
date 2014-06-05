@@ -35,6 +35,8 @@ int header_read( OPTION_T_OP operands, Seg_proc Spr){
   char msgbuf[100];
   int dummy=0;
   char sdummy[256];
+  int xSize, ySize;
+  int nBands;
 
   // initializae GDAL library
   //printf("In header_read file is %s\n",(operands.args.astr_p)[0]);
@@ -87,18 +89,18 @@ int header_read( OPTION_T_OP operands, Seg_proc Spr){
   } else{
     printf("Read metadata!\n");
 
-    // print the matadata to the screen
-    for (i=0; i< 13; i++){
-      printf("%i: %s\n",i,papszMetadata[i]);
-	if(i==1){
-	  ierr=get_header_field_value(papszMetadata[i], "bands", 1, &dummy, NULL);
-	  printf("No. of bands from regex function: %d\n", dummy);
-	}
-	if(i==6){
-	  ierr=get_header_field_value(papszMetadata[i], "file_type", 2, NULL, sdummy);
-	  printf("File type from regex function: %s\n", sdummy);
-	}
-    }
+    xSize = GDALGetRasterXSize( hDataset );
+    ySize = GDALGetRasterYSize( hDataset );
+
+    nBands =  GDALGetRasterCount( hDataset );
+
+    printf(" GDAL xSize=%d ySize=%d\n", xSize,ySize);
+    printf(" GDAL nBands = %d\n", nBands);
+    
+    printf(" GDAL Spr->nlines= %d\n",Spr->nlines);
+    printf(" GDAL Spr->nsamps= %d\n",Spr->nsamps);
+    printf(" GDAL Spr->nbands= %d\n",Spr->nbands);
+
 
   }
 

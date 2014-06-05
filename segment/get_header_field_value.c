@@ -7,7 +7,7 @@
 #define DEBUG 1
 
 // field type 1=integer 2=string
-int get_header_field_value(char* line, const char* field_name, int field_type, int* pval, char* sval){
+int get_header_field_value(char* line, const char* field_name, int field_type, int* pval, char sval[]){
 	const int PMATCH_SIZE=30;
 	const int BUFFER_SIZE=255;	
     int reti;
@@ -93,6 +93,8 @@ int get_header_field_value(char* line, const char* field_name, int field_type, i
 
 	/* Free compiled regular expression if you want to use the regex_t again */
     regfree(&regex);
+
+    strcpy(sval, "foobar");
 
   	return(0);
 }
